@@ -20,7 +20,7 @@ public class Deck {
 
     public Deck() {
         // A full deck
-        new Deck(false);
+         this(false);
     }
 
     public Deck(Card... cards) {
@@ -30,6 +30,7 @@ public class Deck {
     public Card drawCard() {
         if (deck.size() == 0) {
             System.out.println("We are out of cards in the deck.");
+            // Almost guaranteed to make a NullPointerException, this is intended
             return null;
         }
         return deck.remove((int)(Math.random()*deck.size()));

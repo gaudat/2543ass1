@@ -14,7 +14,7 @@ public class Card implements Comparable<Card> {
     private boolean useB2StyleCompare;
 
     public Card(Rank r, Suit s) {
-        new Card(r, s, false);
+        this(r, s, false);
     }
 
     public Card(Rank r, Suit s, boolean useB2StyleCompare) {

@@ -17,21 +17,21 @@ public class GameMain {
             "* OLD MAID *\n" +
             "************\n");
 
-        //OldMaid oldmaidgame = new OldMaid(3);
-        //oldmaidgame.playOneGame();
+        OldMaid oldmaidgame = new OldMaid(3);
+        oldmaidgame.playOneGame();
 
         System.out.println(
-            "***********\n" +
+            "\n***********\n" +
             "* BIG TWO *\n" +
             "***********\n");
         Big2 big2game = new Big2(4);
         big2game.playOneGame();
 
         System.out.println(
-            "*************\n" +
+            "\n*************\n" +
             "* LAST CARD *\n" +
             "*************\n");
-        //LastCard lastcardgame = new LastCard(5);
-        //lastcardgame.playOneGame();
+        LastCard lastcardgame = new LastCard(5);
+        lastcardgame.playOneGame();
     }
 }

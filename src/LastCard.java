@@ -62,7 +62,7 @@ public class LastCard extends CardGame {
                 player[i].addCard(newCard);
                 System.out.print("P" + Integer.toString(i) + " plays PASS; ");
             }
-            if (cardsDealt % player.length == 0) {
+            if (cardsDealt % player.length == player.length-1) {
                 // Print everyone after one round
                 System.out.println();
                 for (int j = 0; j < player.length; j++) {
