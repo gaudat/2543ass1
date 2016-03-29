@@ -5,6 +5,7 @@ import java.util.Collections;
  * Created by anon on 22/3/2016.
  */
 public class B2Player extends Player {
+    // A big 2 player.
 
     public B2Player(Card... cards) {
         this.hand = new ArrayList<>();
@@ -15,18 +16,11 @@ public class B2Player extends Player {
     public Card dealCard(Card... cards) {
         // Removes a card just bigger than the card supplied
         if (cards.length == 0 || cards[0] == null ) {
-            // removes smallest card
-            int target = -1;
-            int minSize = -1;
-            for (int i=0;i<hand.size();i++) {
-                int cSize = hand.get(i).B2StyleHowBig();
-                if (cSize < minSize || minSize == -1) {
-                    minSize = cSize;
-                    target = i;
-                }
-            }
-            return hand.remove(target);
+
+            return hand.remove(0);
         } else {
+            // finds first card bigger and removes it
+            // as hand is sorted, the card is guaranteed to be just bigger
             int target = -1;
             int maxDifference = -1; // Difference between target card and reference
             for (int i = 0; i < hand.size(); i++) {
@@ -48,6 +42,7 @@ public class B2Player extends Player {
     }
 
     public boolean hasD3() {
+        // Does the player have B2 in hand?
         int target = -1;
         for (int i=0;i<hand.size();i++) {
             if (hand.get(i).getRank() == Rank.THREE && hand.get(i).getSuit() == Suit.DIAMOND) {

@@ -72,6 +72,7 @@ public class OldMaid extends CardGame {
             player[i].addCard(c);
             ((OMPlayer) player[i]).removeCardInPairs();
             if (!player[i].hasCards()) {
+                // He wins
                 playerWon = (i + 1) % player.length;
                 break;
             }

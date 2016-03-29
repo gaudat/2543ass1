@@ -3,7 +3,7 @@
  */
 public class Big2 extends CardGame {
     public Big2(int numPlayers) {
-        this.deck = new Deck();
+        this.deck = new Deck(true);
         this.player = new B2Player[numPlayers];
         for (int i = 0; i < this.player.length; i++) {
             this.player[i] = new B2Player();
@@ -43,12 +43,12 @@ public class Big2 extends CardGame {
              currentPlayer = (currentPlayer + 1) % player.length) { // Give next player to play it
 
             if (playersPassed == player.length) {
-                // Put after all pass check, or else a extra round may be counted
                 // Everyone passed once
                 System.out.println("\nPlayer " + currentPlayer + " plays the largest card in this round.");
-                playersPassed = 0;
-                cardsPlayed = 0;
-                currentPlayer = (currentPlayer + player.length - 1) % player.length; // Its your turn again
+                playersPassed = 0; // Reset it
+                cardsPlayed = 0; // This also
+                currentPlayer = (currentPlayer + player.length - 1) % player.length;
+                // decrease current player by 1, so when it runs again it is the biggest guy again
                 topCard = null; // So currentPlayer will draw the smallest card
                 System.out.println();
                 for (int i = 0; i < player.length; i++) {
@@ -60,21 +60,15 @@ public class Big2 extends CardGame {
 
 
             if (cardsPlayed == 0) {
-                // Don't need double new line here
+                // Suppress double new lines
                 System.out.print("Round " + ++roundCount + " : ");
             }
             else if (cardsPlayed % player.length == 0) {
-                // If round count is increase display it
+                // If round count is increased display it
                 System.out.print("\nRound " + ++roundCount + " : ");
             }
-            /*for (int j = 0; j < player.length; j++) {
-                System.out.print("Player " + Integer.toString(j) + ": ");
-                player[j].printHand();
-            }
-            System.out.println("\nTop card is " + topCard + ".");
-            */
             Card dealtCard = (Card) player[currentPlayer].dealCard(topCard);
-            cardsPlayed++;
+            cardsPlayed++; // Even if the player passed
             if (dealtCard != null) {
                 topCard = dealtCard;
                 System.out.print("P" + Integer.toString(currentPlayer) + " plays " + topCard.toString() + "; ");

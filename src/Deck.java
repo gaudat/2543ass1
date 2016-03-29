@@ -3,19 +3,24 @@ import java.util.*;
 public class Deck {
     protected ArrayList<Card> deck;
 
+    public Deck(boolean useB2StyleCompare) {
+        // If boolean is set, the deck should contain cards that use b2-style comparison
+        deck = new ArrayList<>();
+        for (Rank r:Rank.values()) {
+            for (Suit s:Suit.values()) {
+                deck.add(new Card(r,s,useB2StyleCompare));
+            }
+        }
+        Collections.shuffle(deck);
+    }
+
     public void printDeck() {
         System.out.println(deck);
     }
 
     public Deck() {
         // A full deck
-        deck = new ArrayList<>();
-        for (Rank r:Rank.values()) {
-            for (Suit s:Suit.values()) {
-                deck.add(new Card(r,s));
-            }
-        }
-        Collections.shuffle(deck);
+        new Deck(false);
     }
 
     public Deck(Card... cards) {

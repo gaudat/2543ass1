@@ -11,10 +11,17 @@ public class Card implements Comparable<Card> {
 
     private Rank rank;
     private Suit suit;
+    private boolean useB2StyleCompare;
 
     public Card(Rank r, Suit s) {
+        new Card(r, s, false);
+    }
+
+    public Card(Rank r, Suit s, boolean useB2StyleCompare) {
+        // use B2 style compare
         this.rank = r;
         this.suit = s;
+        this.useB2StyleCompare = useB2StyleCompare;
     }
 
     public Rank getRank() {
@@ -25,16 +32,7 @@ public class Card implements Comparable<Card> {
         return this.suit;
     }
 
-    public void setRank(Rank r) {
-        this.rank = r;
-    }
-
-    public void setSuit(Suit s) {
-        this.suit = s;
-    }
-
     public int howBig() {
-        // helper function
         return this.rank.ordinal() * Suit.values().length + Suit.values().length - this.suit.ordinal();
     }
 
@@ -45,8 +43,9 @@ public class Card implements Comparable<Card> {
 
     public int compareTo(Card ref) {
         // The card is bigger if the ordinal is smaller
-        //return this.howBig() - ref.howBig();
-        return this.B2StyleHowBig() - ref.B2StyleHowBig();
+
+        return useB2StyleCompare ? this.B2StyleHowBig() - ref.B2StyleHowBig() : this.howBig() - ref.howBig();
+
     }
 
     public int B2StyleHowBig() {

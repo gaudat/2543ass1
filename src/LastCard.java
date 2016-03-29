@@ -37,16 +37,16 @@ public class LastCard extends CardGame {
         int winner = -1;
         System.out.println("The top card is " + topCard);
 
-        int roundNum = player.length; // Round number, default to player.length so it starts at round 1
+        int cardsDealt = player.length-1; // Number of cards dealt. Default to player.length-1 so it will print round 1
 
         for (int i = 0;
              winner == -1; // No winners yet
              i = (i + 1) % player.length // Increasing player index
                 ) {
-            roundNum++;
+            cardsDealt++;
             if (i == 0) {
-
-                System.out.print("Round " + roundNum/player.length + " : ");
+                // Print round number
+                System.out.print("Round " + cardsDealt/player.length + " : ");
             }
 
             Card dealtCard = ((LCPlayer) player[i]).dealCard(topCard);
@@ -57,11 +57,13 @@ public class LastCard extends CardGame {
                     winner = i;
                 }
             } else {
+                // The player says PASS
                 Card newCard = deck.drawCard();
                 player[i].addCard(newCard);
                 System.out.print("P" + Integer.toString(i) + " plays PASS; ");
             }
-            if (roundNum % player.length == 0) {
+            if (cardsDealt % player.length == 0) {
+                // Print everyone after one round
                 System.out.println();
                 for (int j = 0; j < player.length; j++) {
                     System.out.print("Player " + Integer.toString(j) + " : ");
