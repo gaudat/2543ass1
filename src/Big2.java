@@ -5,9 +5,15 @@ public class Big2 extends CardGame {
     public Big2(int numPlayers) {
         this.deck = new Deck(true);
         this.player = new B2Player[numPlayers];
-        for (int i = 0; i < this.player.length; i++) {
+
+        // Player 0 is the smart one
+        this.player[0] = new SmartB2Player();
+        for (int i=1;i<this.player.length;i++) {
             this.player[i] = new B2Player();
         }
+        /*for (int i = 0; i < this.player.length; i++) {
+            this.player[i] = new B2Player();
+        }*/
     }
 
     @Override

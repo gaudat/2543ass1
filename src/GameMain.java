@@ -24,14 +24,14 @@ public class GameMain {
             "***********\n" +
             "* BIG TWO *\n" +
             "***********\n");
-        //Big2 big2game = new Big2(4);
-        //big2game.playOneGame();
+        Big2 big2game = new Big2(4);
+        big2game.playOneGame();
 
         System.out.println(
             "*************\n" +
             "* LAST CARD *\n" +
             "*************\n");
-        LastCard lastcardgame = new LastCard(5);
-        lastcardgame.playOneGame();
+        //LastCard lastcardgame = new LastCard(5);
+        //lastcardgame.playOneGame();
     }
 }
