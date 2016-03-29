@@ -4,7 +4,7 @@
 public class SmartB2Player extends B2Player {
     // A smarter B2 player.
 
-    private int cardsDealedInThisRound = 0;
+    private int cardsDealtInThisRound = 0;
 
     public Card dealCard(Card... cards) {
         // Removes the next bigger card if I haven't dealt 3 cards in this round.
@@ -12,7 +12,7 @@ public class SmartB2Player extends B2Player {
         int target = -1;
 
         if (cards.length == 1) {
-            if (cardsDealedInThisRound < 3) {
+            if (cardsDealtInThisRound < 3) {
 
                 int maxDifference = -1; // Difference between target card and reference
                 for (int i = 0; i < hand.size(); i++) {
@@ -22,7 +22,7 @@ public class SmartB2Player extends B2Player {
                         target = i;
                     }
                 }
-                cardsDealedInThisRound++;
+                cardsDealtInThisRound++;
             } else {
                 target = hand.size() - 1;
             }

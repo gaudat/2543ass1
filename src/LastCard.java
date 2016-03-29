@@ -25,7 +25,6 @@ public class LastCard extends CardGame {
         }
 
         // Print cards before start
-        System.out.println("Before start: ");
         for (int i = 0; i < player.length; i++) {
             System.out.print("Player " + Integer.toString(i) + ": ");
             player[i].printHand();
@@ -36,34 +35,44 @@ public class LastCard extends CardGame {
 
         // Who is the winner? -1 means nobody
         int winner = -1;
+        System.out.println("The top card is " + topCard);
 
+        int roundNum = player.length; // Round number, default to player.length so it starts at round 1
 
-        for (int i = 0; i < player.length && winner == -1; i = (i + 1) % player.length) {
+        for (int i = 0;
+             winner == -1; // No winners yet
+             i = (i + 1) % player.length // Increasing player index
+                ) {
+            roundNum++;
+            if (i == 0) {
 
-            System.out.println("\nTop card is " + topCard + ".");
+                System.out.print("Round " + roundNum/player.length + " : ");
+            }
 
             Card dealtCard = ((LCPlayer) player[i]).dealCard(topCard);
             if (dealtCard != null) {
                 topCard = dealtCard;
-                System.out.println("Player " + Integer.toString(i) + " plays " + topCard.toString() + ".");
+                System.out.print("P" + Integer.toString(i) + " plays " + topCard.toString() + "; ");
                 if (!player[i].hasCards()) {
                     winner = i;
                 }
             } else {
                 Card newCard = deck.drawCard();
                 player[i].addCard(newCard);
-                System.out.println("Player " + Integer.toString(i) + " draws " + newCard + " from deck.");
+                System.out.print("P" + Integer.toString(i) + " plays PASS; ");
             }
-            System.out.println();
-            for (int j = 0; j < player.length; j++) {
-                System.out.print("Player " + Integer.toString(j) + ": ");
-                player[j].printHand();
-
-
+            if (roundNum % player.length == 0) {
+                System.out.println();
+                for (int j = 0; j < player.length; j++) {
+                    System.out.print("Player " + Integer.toString(j) + " : ");
+                    player[j].printHand();
+                }
             }
         }
-
-        System.out.println("Player " + Integer.toString(winner) + " wins.");
+        if (winner != player.length - 1) {
+            System.out.println(); // Suppress double new lines
+        }
+        System.out.println("Player " + Integer.toString(winner) + " has won!");
 
     }
 }
