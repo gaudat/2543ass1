@@ -7,14 +7,26 @@ import java.util.Collections;
 public class B2Player extends Player {
 
     public B2Player(Card... cards) {
-        this.hand = new ArrayList<Card>();
-        Collections.addAll(hand,cards);
+        this.hand = new ArrayList<>();
+        Collections.addAll(hand, cards);
     }
 
 
     public Card dealCard(Card... cards) {
         // Removes a card just bigger than the card supplied
-        if (cards.length == 1) {
+        if (cards.length == 0 || cards[0] == null ) {
+            // removes smallest card
+            int target = -1;
+            int minSize = -1;
+            for (int i=0;i<hand.size();i++) {
+                int cSize = hand.get(i).B2StyleHowBig();
+                if (cSize < minSize || minSize == -1) {
+                    minSize = cSize;
+                    target = i;
+                }
+            }
+            return hand.remove(target);
+        } else {
             int target = -1;
             int maxDifference = -1; // Difference between target card and reference
             for (int i = 0; i < hand.size(); i++) {
@@ -27,18 +39,6 @@ public class B2Player extends Player {
 
             return target == -1 ? null : hand.remove(target);
 
-        } else {
-            // removes smallest card
-            int target = -1;
-            int minSize = -1;
-            for (int i=0;i<hand.size();i++) {
-                int cSize = hand.get(i).B2StyleHowBig();
-                if (cSize < minSize || minSize == -1) {
-                    minSize = cSize;
-                    target = i;
-                }
-            }
-            return hand.remove(target);
         }
     }
 

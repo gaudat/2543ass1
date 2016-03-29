@@ -54,7 +54,9 @@ public class OldMaid extends CardGame {
         int playerWon = -1;
         int roundCount = 0;
 
-        for (int i = leastCardPlayer; ; i = (i + 1) % player.length) {
+        for (int i = leastCardPlayer;
+                ; // Always true because we exit the loop by breaking it
+             i = (i + 1) % player.length) {
             if (i == leastCardPlayer) {
                 System.out.println("Round " + ++roundCount);
                 for (int j = 0; j < player.length; j++) {

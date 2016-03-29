@@ -45,8 +45,8 @@ public class Card implements Comparable<Card> {
 
     public int compareTo(Card ref) {
         // The card is bigger if the ordinal is smaller
-        return this.howBig() - ref.howBig();
-
+        //return this.howBig() - ref.howBig();
+        return this.B2StyleHowBig() - ref.B2StyleHowBig();
     }
 
     public int B2StyleHowBig() {
