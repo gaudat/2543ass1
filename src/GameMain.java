@@ -12,32 +12,26 @@ public class GameMain {
         // Old Maid together, four playing Big2, and five
         // playing Last Card
 
-        /*System.out.println(
-            "************\n" +
-            "* OLD MAID *\n" +
-            "************\n");
+        System.out.println(
+                "************\n" +
+                        "* OLD MAID *\n" +
+                        "************\n");
 
         OldMaid oldmaidgame = new OldMaid(3);
         oldmaidgame.playOneGame();
 
         System.out.println(
-            "\n***********\n" +
-            "* BIG TWO *\n" +
-            "***********\n");*/
-        int wins=0;
-        for (int i=0;i<10000;i++) {
-            Big2 big2game = new Big2(4);
-big2game.playOneGame();
-            if (big2game.getWinner() == 0) {
-                wins++;
-            }
-        }
-        System.out.println(wins);
-        /*System.out.println(
-            "\n*************\n" +
-            "* LAST CARD *\n" +
-            "*************\n");
+                "\n***********\n" +
+                        "* BIG TWO *\n" +
+                        "***********\n");
+        Big2 big2game = new Big2(4);
+        big2game.playOneGame();
+
+        System.out.println(
+                "\n*************\n" +
+                        "* LAST CARD *\n" +
+                        "*************\n");
         LastCard lastcardgame = new LastCard(5);
-        lastcardgame.playOneGame();*/
+        lastcardgame.playOneGame();
     }
 }
