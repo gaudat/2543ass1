@@ -29,7 +29,9 @@ public class SmartB2Player extends B2Player {
                 }
                 cardsDealtInThisRound++;
             } else {
-                target = hand.size() - 1;
+                if (hand.get(hand.size()-1).compareTo(cards[0]) > 0) {
+                    target = hand.size() - 1;
+                }
             }
             return target == -1 ? null : hand.remove(target);
         }

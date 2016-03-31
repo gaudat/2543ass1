@@ -6,14 +6,14 @@ public class Big2 extends CardGame {
         this.deck = new Deck(true);
         this.player = new B2Player[numPlayers];
 
-        /*// Player 0 is the smart one
+        // Player 0 is the smart one
         this.player[0] = new SmartB2Player();
-        for (int i=1;i<this.player.length;i++) {
-            this.player[i] = new B2Player();
-        }*/
-        for (int i = 0; i < this.player.length; i++) {
+        for (int i = 1; i < this.player.length; i++) {
             this.player[i] = new B2Player();
         }
+        /*for (int i = 0; i < this.player.length; i++) {
+            this.player[i] = new B2Player();
+        }*/
     }
 
     @Override
@@ -48,6 +48,27 @@ public class Big2 extends CardGame {
              winner == -1; // If nobody is winning
              currentPlayer = (currentPlayer + 1) % player.length) { // Give next player to play it
 
+
+            if (cardsPlayed == 0) {
+                // Suppress double new lines
+                System.out.print("Round " + ++roundCount + " : ");
+            } else if (cardsPlayed % player.length == 0 && playersPassed != player.length-1) {
+                // If round count is increased display it
+                System.out.print("\nRound " + ++roundCount + " : ");
+            }
+            Card dealtCard = (Card) player[currentPlayer].dealCard(topCard);
+            cardsPlayed++; // Even if the player passed
+            if (dealtCard != null) {
+                topCard = dealtCard;
+                System.out.print("P" + Integer.toString(currentPlayer) + " plays " + topCard.toString() + "; ");
+                playersPassed = 0;
+            } else {
+
+                playersPassed++;
+                if (playersPassed != player.length) {
+                    System.out.print("P" + Integer.toString(currentPlayer) + " plays PASS; ");
+                }
+            }
             if (playersPassed == player.length) {
                 // Everyone passed once
                 System.out.println("\nPlayer " + currentPlayer + " plays the largest card in this round.");
@@ -58,35 +79,17 @@ public class Big2 extends CardGame {
                 topCard = null; // So currentPlayer will draw the smallest card
                 System.out.println();
                 for (int i = 0; i < player.length; i++) {
-                    System.out.print("Player "+i+" : ");
+                    System.out.print("Player " + i + " : ");
                     player[i].printHand();
                 }
                 continue;
             }
 
 
-            if (cardsPlayed == 0) {
-                // Suppress double new lines
-                System.out.print("Round " + ++roundCount + " : ");
-            }
-            else if (cardsPlayed % player.length == 0) {
-                // If round count is increased display it
-                System.out.print("\nRound " + ++roundCount + " : ");
-            }
-            Card dealtCard = (Card) player[currentPlayer].dealCard(topCard);
-            cardsPlayed++; // Even if the player passed
-            if (dealtCard != null) {
-                topCard = dealtCard;
-                System.out.print("P" + Integer.toString(currentPlayer) + " plays " + topCard.toString() + "; ");
-              } else {
-                System.out.print("P" + Integer.toString(currentPlayer) + " plays PASS; ");
-                playersPassed++;
-            }
-
             if (!player[currentPlayer].hasCards()) winner = currentPlayer;
         }
         System.out.println();
-        System.out.println("Player  " + Integer.toString(winner)+" has won!");
+        System.out.println("Player  " + Integer.toString(winner) + " has won!");
 
     }
 }
